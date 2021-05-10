@@ -85,6 +85,7 @@ vector<vector<int>> highest_peak2(vector<vector<int>> &is_water)
                 continue;
             }        
             else if (is_water[i][j] == 1) {
+                u->visited = true;
                 q.push(u);
             }        
         }
@@ -94,8 +95,8 @@ vector<vector<int>> highest_peak2(vector<vector<int>> &is_water)
         node* s = q.front();
         q.pop();
 
-        if (s->visited == false) {
-            s->visited = true;
+        if (s->visited == false or s->visited == true) {
+            // s->visited = true;
 
             if (s->i > 0) {
                 node* v = new node;
@@ -106,6 +107,7 @@ vector<vector<int>> highest_peak2(vector<vector<int>> &is_water)
                     v->val = s->val + 1;
                     q.push(v);
                     aux[v->i][v->j] = v;
+                    aux[v->i][v->j]->visited = true;
                 }
 
                 
@@ -120,6 +122,7 @@ vector<vector<int>> highest_peak2(vector<vector<int>> &is_water)
                     v->val = s->val + 1;
                     q.push(v);
                     aux[v->i][v->j] = v;
+                    aux[v->i][v->j]->visited = true;                    
                 }
 
 
@@ -134,6 +137,7 @@ vector<vector<int>> highest_peak2(vector<vector<int>> &is_water)
                     v->val = s->val + 1;
                     q.push(v);
                     aux[v->i][v->j] = v;
+                    aux[v->i][v->j]->visited = true;
                 }
                 
 
@@ -148,6 +152,7 @@ vector<vector<int>> highest_peak2(vector<vector<int>> &is_water)
                     v->val = s->val + 1;
                     q.push(v);
                     aux[v->i][v->j] = v;
+                    aux[v->i][v->j]->visited = true;
                 }
 
             } 
@@ -157,15 +162,20 @@ vector<vector<int>> highest_peak2(vector<vector<int>> &is_water)
 
 
     vector<vector<int>> vec;
+    vec.resize(nRow);
+    for (int i=0; i<nRow; i++)
+        vec[i].resize(nCol);
 
     for (int i=0; i<nRow; i++) {
         for (int j=0; j<nCol; j++) {
             cout<< aux[i][j]->val <<" -- ";
-            cout<< endl;
+            vec[i].push_back(aux[i][j]->val);
+            // cout<< endl;
         }
         cout<< endl;
     }
 
+    return vec;
 
 }
 
@@ -186,18 +196,23 @@ int main()
     // }   
 
 
-    // is_water =  {
-    //                 {0,0,0,0,0,0,1,0},
-    //                 {0,1,0,0,0,0,0,0},
-    //                 {0,0,0,0,0,0,0,0},
-    //                 {0,0,0,0,0,0,0,0},
-    //                 {0,0,0,0,0,0,0,0},
-    //                 {0,0,0,0,0,0,0,0},
-    //                 {0,0,0,0,0,0,1,0},
-    //                 {0,0,1,0,0,0,0,0}
-    //             };
+    is_water =  {
+                    {0,0,0,0,0,0,1,0},
+                    {0,1,0,0,0,0,0,0},
+                    {0,0,0,0,0,0,0,0},
+                    {0,0,0,0,0,0,0,0},
+                    {0,0,0,0,0,0,0,0},
+                    {0,0,0,0,0,0,0,0},
+                    {0,0,0,0,0,0,1,0},
+                    {0,0,1,0,0,0,0,0}
+                };
 
     vector<vector<int>> v = highest_peak2(is_water);
+
+    for (auto x=v.begin(); x != v.end(); x++)
+        for (auto y : *x)
+            cout<< y << "  ";
+        cout<<endl;
     
     
     return 0;
