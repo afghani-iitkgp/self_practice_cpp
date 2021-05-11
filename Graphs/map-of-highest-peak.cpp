@@ -215,7 +215,7 @@ int main()
     vector<vector<int>> v = highest_peak2(is_water);
 
     for (auto x=v.begin(); x != v.end(); x++) {
-        for (auto y : *x)
+        for (int y : *x)
             cout<< y << " | ";
         cout<<'\n';
     }
