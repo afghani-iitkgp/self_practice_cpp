@@ -9,6 +9,7 @@
             "name": "g++ - Build and debug active file",
             "type": "cppdbg",
             "request": "launch",
+            "targetArchitecture": "x64",    
             "program": "${fileDirname}/${fileBasenameNoExtension}",
             "args": [],
             "stopAtEntry": true,
